@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<!-- saved from url=(0022)http://localhost:3000/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#000000">
+    <!--
+      manifest.json provides metadata used when your web app is added to the
+      homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
+    -->
+    <link rel="manifest" href="http://localhost:3000/manifest.json">
+    <link rel="shortcut icon" href="http://localhost:3000/favicon.ico">
+    <!--
+      Notice the use of  in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <link rel="stylesheet" href="./React App_files/cryptocoins.css">
+    <style type="text/css">body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  overflow:hidden;
+
+}
+.loader-gif{
+  background-repeat: no-repeat;
+  background-position: center; 
+  background-repeat: no-repeat;
+  background-size: 60%;
+  height: 92%;
+  background-image: url(/static/media/loader.cef0213d.gif);
+}
+.app-container{
+  height: 100vh;
+  width: 100%;
+  
+}
+.header{
+top: 0%;
+width: 100%;
+height: 8%;
+background-color: green;
+}
+.nav-options-bar{
+  width: 100%;
+  height: 10%;
+  background-color: rgb(0, 9, 128);
+}
+.main-coins-container{
+  width: 100%;
+  height: 77%;
+  background-color: yellow;
+}
+.left-nav{
+  background-color: #0b0b0b;
+  height: 100%;
+  width: 204px;
+}
+.left-search{
+  height: 8%;
+  background-color: red;
+}
+.coins-list-container{
+  text-align: center;
+  margin-top: 10px;
+  width: 100%;
+  height: 90%;
+  overflow-y:scroll;
+  overflow-x:hidden;
+}
+.coin-element-list{
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
+  -ms-flex-pack: left;
+      justify-content: left;
+
+  height: 10%;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  width: 100%;
+  background-color:rgba(76, 175, 80, 0.3)
+}
+.cc{
+  
+  margin-left: 10px;
+  margin-right: 10px;
+  font-size: 32px;
+}
+.footer{
+  position: absolute;
+  bottom: 0%;
+  width: 100%;
+  height: 5%;
+  background-color: rgb(0, 23, 128);
+}
+::-webkit-scrollbar {
+  width: 10px;
+  padding-top: 40px;
+}
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.3);
+  border: 1px solid black;
+  background: black;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  height: 30px;
+  width: 8px;
+  border: 1px solid black;
+  background:black;
+  -webkit-box-shadow: 0 1px 1px rgb(0, 0, 0);
+  background: -webkit-linear-gradient(rgb(200, 200, 200), rgb(150, 150, 150));
+}
+
+::-webkit-scrollbar-track-piece {
+  height: 30px;
+}</style><script type="text/javascript" charset="utf-8" src="./React App_files/0.21d75e309379232f12a2.hot-update.js.download"></script></head><body><ink rel="stylesheet" href="./webfont/cryptocoins-colors.css">
+    <title>React App</title>
+  
+  
+    <noscript>
+      You need to enable JavaScript to run this app.
+    </noscript>
+    <div id="root"><div class="app-container"><div class="header"></div><div class="nav-options-bar"></div><div class="main-coins-container"><div class="left-nav"><div class="left-search"></div><div class="coins-list-container"><div class="coin-element-list"><span class="cc BTC" title="BTC"></span><span>BITCOIN</span></div><div class="coin-element-list"><span class="cc ETH" title="ETH"></span><span>ETHEREUM</span></div><div class="coin-element-list"><span class="cc XRP" title="XRP"></span><span>RIPPLE</span></div><div class="coin-element-list"><span class="cc BCH" title="BCH"></span><span>BITCOIN-CASH</span></div><div class="coin-element-list"><span class="cc ADA" title="ADA"></span><span>CARDANO</span></div><div class="coin-element-list"><span class="cc XEM" title="XEM"></span><span>NEM</span></div><div class="coin-element-list"><span class="cc LTC" title="LTC"></span><span>LITECOIN</span></div><div class="coin-element-list"><span class="cc XLM" title="XLM"></span><span>STELLAR</span></div><div class="coin-element-list"><span class="cc MIOTA" title="MIOTA"></span><span>IOTA</span></div><div class="coin-element-list"><span class="cc TRX" title="TRX"></span><span>TRON</span></div><div class="coin-element-list"><span class="cc DASH" title="DASH"></span><span>DASH</span></div><div class="coin-element-list"><span class="cc NEO" title="NEO"></span><span>NEO</span></div><div class="coin-element-list"><span class="cc XMR" title="XMR"></span><span>MONERO</span></div><div class="coin-element-list"><span class="cc EOS" title="EOS"></span><span>EOS</span></div><div class="coin-element-list"><span class="cc ICX" title="ICX"></span><span>ICON</span></div><div class="coin-element-list"><span class="cc QTUM" title="QTUM"></span><span>QTUM</span></div><div class="coin-element-list"><span class="cc BTG" title="BTG"></span><span>BITCOIN-GOLD</span></div><div class="coin-element-list"><span class="cc ETC" title="ETC"></span><span>ETHEREUM-CLASSIC</span></div><div class="coin-element-list"><span class="cc XRB" title="XRB"></span><span>RAIBLOCKS</span></div><div class="coin-element-list"><span class="cc LSK" title="LSK"></span><span>LISK</span></div></div></div></div><div class="footer"></div></div></div>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+  <script type="text/javascript" src="./React App_files/bundle.js.download"></script>
+
+</ink></body></html>

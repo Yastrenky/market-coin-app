@@ -11,7 +11,7 @@ class App extends Component {
     this.fetchLoadData = this.fetchLoadData.bind(this);
   }
   fetchLoadData(){
-    fetch("https://api.coinmarketcap.com/v1/ticker/?limit=20" ,{ method: 'GET'})
+    fetch("https://api.coinmarketcap.com/v1/ticker/?limit=50" ,{ method: 'GET'})
     .then(response => response.json())
     .then(newData => this.setState({data: newData}))
     .catch(e => e);
@@ -21,6 +21,8 @@ class App extends Component {
     }
   render() {
 
+ var data = this.state.data;
+ console.log(data.length);
     return (
       <div className="app-container">
       <div className="header"></div>
@@ -28,13 +30,8 @@ class App extends Component {
       <div className="main-coins-container">
          <div className="left-nav">
             <div className="left-search"></div>
-            <div className="coins-list-container">
-            { this.state.data.map(item => ( 
-         <div className="coin-element-list" key={item.id}><p>{item.id.toUpperCase()}</p></div>
-       ))
-         }
-            
-            </div>
+            {data.length===0?<Loader/>:<ListGenerator props={data}/>}
+             
          
          </div>
 
@@ -48,5 +45,25 @@ class App extends Component {
     );
   }
 }
+function Loader(){
+  return(
+    <div className="loader-gif"></div>
+  )
+}
+function ListGenerator({props}){
+  return(
+    <div className="coins-list-container">
+    
+                { props.map(item => ( 
+             <div className="coin-element-list" key={item.id}> 
+                <span className={"cc "+item.symbol} title={item.symbol}></span>
+                <span>{item.id.toUpperCase()}</span>
+             </div>
+           ))
+             }
+                
+                </div>
 
+  );
+}
 export default App;

@@ -1,0 +1,24 @@
+webpackHotUpdate(0,{
+
+/***/ "./node_modules/css-loader/index.js?{\"importLoaders\":1}!./node_modules/postcss-loader/lib/index.js?{\"ident\":\"postcss\"}!./src/index.css":
+/*!***************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader?{"importLoaders":1}!./node_modules/postcss-loader/lib?{"ident":"postcss"}!./src/index.css ***!
+  \***************************************************************************************************************************/
+/*! dynamic exports provided */
+/*! all exports used */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "body {\n  margin: 0;\n  padding: 0;\n  font-family: sans-serif;\n  overflow:hidden;\n\n}\n.loader-gif{\n  background-repeat: no-repeat;\n  background-position: center; \n  background-repeat: no-repeat;\n  background-size: 60%;\n  height: 92%;\n  background-image: url(" + __webpack_require__(/*! ./loader.gif */ "./src/loader.gif") + ");\n}\n.app-container{\n  height: 100vh;\n  width: 100%;\n  \n}\n.header{\ntop: 0%;\nwidth: 100%;\nheight: 8%;\nbackground-color: green;\n}\n.nav-options-bar{\n  width: 100%;\n  height: 10%;\n  background-color: rgb(0, 9, 128);\n}\n.main-coins-container{\n  width: 100%;\n  height: 77%;\n  background-color: yellow;\n}\n.left-nav{\n  background-color: #0b0b0b;\n  height: 100%;\n  width: 204px;\n}\n.left-search{\n  height: 8%;\n  background-color: red;\n}\n.coins-list-container{\n  text-align: center;\n  margin-top: 10px;\n  width: 100%;\n  height: 90%;\n  overflow-y:scroll;\n  overflow-x:hidden;\n}\n.coin-element-list{\n  display: -ms-flexbox;\n  display: flex;\n  -ms-flex-align: center;\n      align-items: center;\n  -ms-flex-pack: left;\n      justify-content: left;\n\n  height: 10%;\n  border-top: 1px solid black;\n  border-bottom: 1px solid black;\n  width: 100%;\n  background-color:rgba(76, 175, 80, 0.3)\n}\n.cc{\n  \n  margin-left: 10px;\n  margin-right: 10px;\n  font-size: 32px;\n}\n.footer{\n  position: absolute;\n  bottom: 0%;\n  width: 100%;\n  height: 5%;\n  background-color: rgb(0, 23, 128);\n}\n::-webkit-scrollbar {\n  width: 10px;\n  padding-top: 40px;\n}\n\n::-webkit-scrollbar-track {\n  -webkit-box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.3);\n  border: 1px solid black;\n  background: black;\n  border-radius: 10px;\n}\n\n::-webkit-scrollbar-thumb {\n  border-radius: 10px;\n  height: 30px;\n  width: 8px;\n  border: 1px solid black;\n  background:black;\n  -webkit-box-shadow: 0 1px 1px rgb(0, 0, 0);\n  background: -webkit-linear-gradient(rgb(200, 200, 200), rgb(150, 150, 150));\n}\n\n::-webkit-scrollbar-track-piece {\n  height: 30px;\n}", ""]);
+
+// exports
+
+
+/***/ })
+
+})
+//# sourceMappingURL=0.21d75e309379232f12a2.hot-update.js.map
