@@ -37,11 +37,14 @@ background-color: green;
 .left-nav{
   background-color: #0b0b0b;
   height: 100%;
-  width: 204px;
+  width: 217px;
 }
 .left-search{
-  height: 8%;
-  background-color: red;
+  padding-top: 10px;
+  padding-left: 2px;
+  height: 7%;
+  background-color: rgb(5, 5, 5);
+
 }
 .coins-list-container{
   text-align: center;
@@ -70,7 +73,18 @@ background-color: green;
   margin-right: 10px;
   font-size: 32px;
 }
-.footer{
+
+.left-search-container button{
+  height: 10px;
+}
+.left-search-container input{
+  width: 137px;
+  margin-right: 2px;
+}
+.custom-select{
+      height: calc(2.25rem + -5px);
+}
+      .footer{
   position: absolute;
   bottom: 0%;
   width: 100%;
