@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Loader from './Loader';
 import ListGenerator from './ListGenerator';
+import Search from './Search'
 class App extends Component {
   constructor(props){
     super(props);
@@ -22,9 +23,7 @@ class App extends Component {
     var urllimited="https://api.coinmarketcap.com/v1/ticker/?limit="+limit;
     fetch(urllimited,{
        method: 'GET',
-       headers:{
-        'Access-Control-Allow-Origin':''
-        },
+
   
   })
     .then(response => response.json())
@@ -57,15 +56,21 @@ class App extends Component {
     return (
       <div className="app-container">
       <div className="header"></div>
-      <div className="nav-options-bar"></div>
+      <div className="nav-options-bar">
+      <span className="hvr-grow" ><i className="fa fa-home "></i></span>
+      <span className="hvr-grow"><i className="fa fa-exchange"></i></span>
+      <span className="hvr-grow"><i className="fa fa-cloud"></i></span>
+      <span className="hvr-grow"><i className="fa fa-cogs"></i></span>
+      </div>
       <div className="main-coins-container">
          <div className="left-nav">
-            <div className="left-search">
-            
-            <Search state={this.state} handleSelectet={this.handleSelectet} handelSearch={this.handleSearch}/>
-          
+            <div className="left-search">            
+            <Search state={this.state} handleSelectet={this.handleSelectet} handelSearch={this.handleSearch}/>          
             </div>
-            {limitValue!==data.length || data.length===0?<Loader/>:<ListGenerator props={data}/>}           
+            {limitValue!==data.length || data.length===0?<Loader/>:<ListGenerator props={data}/>}             
+            </div> 
+            <div className="board-container">
+                    
          </div>
       </div>
       <div className="footer"></div>
@@ -74,25 +79,6 @@ class App extends Component {
     );
   }
 }
-function Search({state, handelSearch ,handleSelectet}){
-  return(
-    <div className="left-search-container">
-           <span><input value={state.searchValue} onChange={handelSearch}type="text" placeholder="Search..." /></span>
-           <span><select value={state.limit} onChange={handleSelectet}
-           className="custom-select" id="country">
-                   <option value="10">10</option>
-                   <option value="20">20</option>
-                   <option value="30">30</option>
-                   <option value="40">40</option>
-                   <option value="50">50</option>
-                   <option value="60">60</option>
-                   <option value="70">70</option>
-                   <option value="80">80</option>
-                   <option value="90">90</option>
-                   <option value="100">100</option>
-</select></span>
-</div>
-  )
-}
+
 
 export default App;
