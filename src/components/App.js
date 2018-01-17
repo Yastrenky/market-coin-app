@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Loader from './Loader';
 import ListGenerator from './ListGenerator';
-import Search from './Search'
+import Search from './Search';
+import HeaderNav from './HeaderNav';
 class App extends Component {
   constructor(props){
     super(props);
@@ -13,6 +14,7 @@ class App extends Component {
         searchValue:""
     }
     this.fetchLoadData = this.fetchLoadData.bind(this);
+    this.fetchLoadALLData = this.fetchLoadALLData.bind(this);
     this.handleSelectet= this.handleSelectet.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
   }
@@ -25,9 +27,19 @@ class App extends Component {
        method: 'GET',
 
   
+  }).then(response => response.json())
+  .then(newData => this.setState({data: newData}))
+  .catch(e => e);
+}
+  fetchLoadALLData(){
+    var urllimited="https://api.coinmarketcap.com/v1/ticker/?limit=1000";
+    fetch(urllimited,{
+       method: 'GET',
+
+  
   })
     .then(response => response.json())
-    .then(newData => this.setState({data: newData}))
+    .then(newData => this.setState({all_data: newData}))
     .catch(e => e);
   }
   handleSearch(e){
@@ -42,9 +54,11 @@ class App extends Component {
   }
   componentDidMount(){
     this.fetchLoadData();
-
+   
     }
   render() {
+
+    console.log(this.state.limit)
     var limitValue=this.state.limit;
     var data = this.state.data;
     if(limitValue!==data.length){
@@ -55,13 +69,29 @@ class App extends Component {
 
     return (
       <div className="app-container">
-      <div className="header"></div>
-      <div className="nav-options-bar">
-      <span className="hvr-grow" ><i className="fa fa-home "></i></span>
-      <span className="hvr-grow"><i className="fa fa-exchange"></i></span>
-      <span className="hvr-grow"><i className="fa fa-cloud"></i></span>
-      <span className="hvr-grow"><i className="fa fa-cogs"></i></span>
+      <div className="header-user">
+    
+    <span className="logo-container">
+      <span className="logo"></span>
+      <span className="title">CryptoCoin-App</span>
+      </span>
+
+
+      <span className="user-form-container">
+   <form>
+     <div className="form-row">
+      <input type="email" className="form-control" id="inputEmail4" placeholder="Email"/>
+      <input type="password" className="form-control" id="inputPassword4" placeholder="Password"/>    
+      <button type="submit" className="btn btn-primary">Sign in</button>
+       <span>or</span>
+      <button type="submit" className="btn btn-primary">Register</button>
+     </div>
+   </form>
+      </span>
+      
       </div>
+      <HeaderNav/>
+
       <div className="main-coins-container">
          <div className="left-nav">
             <div className="left-search">            
