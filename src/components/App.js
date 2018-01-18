@@ -46,6 +46,7 @@ class App extends Component {
 
     this.setState({
       searchValue:e.target.value,
+      
     });
   }
   handleSelectet(e){
@@ -54,17 +55,28 @@ class App extends Component {
   }
   componentDidMount(){
     this.fetchLoadData();
-   
+   this.fetchLoadALLData();
     }
   render() {
 
-    console.log(this.state.limit)
     var limitValue=this.state.limit;
     var data = this.state.data;
-    if(limitValue!==data.length){
+    var all_data= this.state.all_data;
+    var searchValue=this.state.searchValue;
+    if(limitValue!==data.length  ){
     this.fetchLoadData();
     }
-
+   if(all_data.length!==0 && searchValue.length!==0){
+     var array_result=[]
+    all_data.map(elem=>{
+   if((elem.name.toLowerCase()).includes(searchValue.toLowerCase())){
+     array_result.push(elem)
+   }
+  
+  })
+  limitValue=array_result.length;
+  data=array_result;
+   }
 
 
     return (
@@ -95,7 +107,7 @@ class App extends Component {
       <div className="main-coins-container">
          <div className="left-nav">
             <div className="left-search">            
-            <Search state={this.state} handleSelectet={this.handleSelectet} handelSearch={this.handleSearch}/>          
+            <Search limit={limitValue} state={this.state} handleSelectet={this.handleSelectet} handelSearch={this.handleSearch}/>          
             </div>
             {limitValue!==data.length || data.length===0?<Loader/>:<ListGenerator props={data}/>}             
             </div> 
