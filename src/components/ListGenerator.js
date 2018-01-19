@@ -6,7 +6,7 @@ const ListGenerator =entrie=>{
       
             <div className="coins-list-container">
                  { entrie.props.map(item => ( 
-                     <div className="coin-element-list" key={item.id} > 
+                     <div className="coin-element-list hvr-underline-from-center hvr-grow" key={item.id} > 
                         <span className={"cc "+item.symbol} title={item.symbol}></span>
                         <span>{item.id.toUpperCase()}</span>
                      </div>

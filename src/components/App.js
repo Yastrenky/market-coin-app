@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import Loader from './Loader';
-import ListGenerator from './ListGenerator';
-import Search from './Search';
 import HeaderNav from './HeaderNav';
+import SignUp from './SignUp';
+import SignIn from './SignIn'
+import Home from './Home';
 class App extends Component {
   constructor(props){
     super(props);
@@ -90,32 +90,39 @@ class App extends Component {
 
 
       <span className="user-form-container">
-   <form>
-     <div className="form-row">
-      <input type="email" className="form-control" id="inputEmail4" placeholder="Email"/>
-      <input type="password" className="form-control" id="inputPassword4" placeholder="Password"/>    
-      <button type="submit" className="btn btn-primary">Sign in</button>
-       <span>or</span>
-      <button type="submit" className="btn btn-primary">Register</button>
-     </div>
-   </form>
+       <span>Login as:  <i className="fa fa-user-circle user-image" aria-hidden="true"></i> Yastrenky</span> <span className="badge badge-primary">Log out</span>
       </span>
       
       </div>
-      <HeaderNav/>
+      {/* <SignIn/> */}
 
-      <div className="main-coins-container">
-         <div className="left-nav">
-            <div className="left-search">            
-            <Search limit={limitValue} state={this.state} handleSelectet={this.handleSelectet} handelSearch={this.handleSearch}/>          
-            </div>
-            {limitValue!==data.length || data.length===0?<Loader/>:<ListGenerator props={data}/>}             
-            </div> 
-            <div className="board-container">
-                    
-         </div>
+
+
+
+       <HeaderNav/>      
+         <Home 
+       limitValue={limitValue} 
+        data={data} 
+        state={this.state}
+        handleSelectet={this.handleSelectet}
+       handleSearch={this.handleSearch} />
+
+      <div className="footer">
+      <p>
+      &copy;{(new Date().getFullYear())} CryptoCoin-App
+
+            &nbsp;&nbsp;&nbsp;&nbsp;
+
+      Design by <a href="http://ybravo.fvi-grad.com">Yastrenky Bravo</a> &nbsp;
+
+           | &nbsp;<a href="https://github.com/Yastrenky"><i className="fa fa-github link"></i></a> &nbsp;
+           | &nbsp;<a href="https://www.facebook.com/profile.php?id=100008211978623"><i className="fa fa-facebook link"></i></a> &nbsp;
+           | &nbsp;<a href="https://www.linkedin.com/in/yastrenky-bravo-192354151/"><i className="fa fa-linkedin link"></i></a>&nbsp;
+           | &nbsp;<a href="https://plus.google.com/u/1/113492438526616026377"><i className="fa fa-google link"></i></a>&nbsp;
+
+
+      </p>
       </div>
-      <div className="footer"></div>
        
       </div>
     );

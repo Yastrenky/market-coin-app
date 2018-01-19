@@ -22,7 +22,7 @@
 }
 .hvr-grow:hover, .hvr-grow:focus, .hvr-grow:active {
   -webkit-transform: scale(1.1);
-  transform: scale(1.1);
+  transform: scale(1.01);
 }
 
 /* Shrink */
@@ -2187,8 +2187,8 @@
   left: 50%;
   right: 50%;
   bottom: 0;
-  background: #2098D1;
-  height: 4px;
+  background: #f7931a;
+  height: 1px;
   -webkit-transition-property: left, right;
   transition-property: left, right;
   -webkit-transition-duration: 0.3s;
