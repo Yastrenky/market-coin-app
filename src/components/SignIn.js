@@ -25,7 +25,7 @@ const SignIn = entrie => {
             <div className="md-form pb-3">
                 <input type="password" id="Form-pass1" className="form-control"/>
                 <label >Your password</label>
-                <p className="font-small blue-text d-flex justify-content-end">Forgot <a href="#" className="blue-text ml-1"> Password?</a></p>
+                <p className="font-small blue-text d-flex justify-content-end">Forgot <a href="/" className="blue-text ml-1"> Password?</a></p>
             </div>
 
             <div className="text-center mb-3">
@@ -38,7 +38,7 @@ const SignIn = entrie => {
 
    
         <div className="modal-footer mx-5 pt-3 mb-1">
-            <p className="font-small grey-text d-flex justify-content-end">Not a member? <a href="#" className="blue-text ml-1"> Sign Up</a></p>
+            <p className="font-small grey-text d-flex justify-content-end">Not a member? <a href="/" className="blue-text ml-1"> Sign Up</a></p>
         </div>
 
     </div>

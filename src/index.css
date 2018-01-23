@@ -88,6 +88,9 @@ background: linear-gradient(172deg,#747373,#040404)!important;
   height: 6%;
   background: linear-gradient(172deg,#0275d8,#040404)!important;
 }
+.nav-options-bar a{
+  width: 100%;
+}
 .nav-options-bar span{
   display: flex;
   justify-content: center;
@@ -121,7 +124,7 @@ background: linear-gradient(172deg,#747373,#040404)!important;
   margin-left: 9px;
   padding-top: 10px;
   padding-left: 2px;
-  height: 7%;
+
   background-color: rgb(5, 5, 5);
 
 }
@@ -199,8 +202,11 @@ background: linear-gradient(172deg,#747373,#040404)!important;
 .hvr-pulse-grow{
   display: inline-flex;
 }
+.card-image{
+  background-color:"#4c4c4c";
+}
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 4px;
   padding-top: 40px;
 }
 
@@ -216,7 +222,7 @@ background: linear-gradient(172deg,#747373,#040404)!important;
 ::-webkit-scrollbar-thumb {
   border-radius: 10px;
   height: 10px;
-  width: 8px;
+  width: 4px;
   border: 1px solid black;
   background:black;
   -webkit-box-shadow: 0 1px 1px rgb(0, 0, 0);

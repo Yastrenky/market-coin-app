@@ -33,7 +33,7 @@ const SignUp =entrie=>{
              </div>
              <div className="form-group">
                     <input type="checkbox" id="checkbox"/>
-                    <label  className="grey-text">Accept the<a href="#" className="blue-text"> Terms and Conditions</a></label>
+                    <label  className="grey-text">Accept the<a href="/" className="blue-text"> Terms and Conditions</a></label>
                 </div>
              <div className="text-center mb-3">
                  <button type="button" className="btn blue-gradient btn-block btn-rounded z-depth-1a">Sign Up</button>
