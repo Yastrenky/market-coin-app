@@ -5,25 +5,28 @@ import HeaderNav from './HeaderNav';
 import SignUp from './SignUp';
 import SignIn from './SignIn'
 import Footer from './Footer';
-import Home from './container/Home'
+import Home from './Home'
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      favorites:[],
       all_data: [],
       data: [],
       limit: 10,
+      selectedCoin:"bitcoin",
       searchValue: ""
     }
     this.fetchLoadData = this.fetchLoadData.bind(this);
     this.fetchLoadALLData = this.fetchLoadALLData.bind(this);
     this.handleSelectet = this.handleSelectet.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
+    this.handleElementListCoinClick = this.handleElementListCoinClick.bind(this)
   }
 
   fetchLoadData() {
-    console.log("external access")
+    // console.log("external access")
     var limit = this.state.limit;
     var urllimited = "https://api.coinmarketcap.com/v1/ticker/?limit=" + limit;
     fetch(urllimited, {
@@ -56,16 +59,20 @@ class App extends Component {
     this.setState({ limit: parseFloat(e.target.value) });
 
   }
+  handleElementListCoinClick(e){
+this.setState({selectedCoin:e.target.getAttribute("name")})
+  }
   componentDidMount() {
     this.fetchLoadData();
     this.fetchLoadALLData();
   }
   render() {
 
-    
+    console.log("Favorites: "+ this.state.favorites)
 
 
     return (
+  
       <div className="app-container">
         <Header />
         <HeaderNav />
@@ -75,6 +82,7 @@ class App extends Component {
           render={() => <Home
 
             state={this.state}
+            handleElementListCoinClick={this.handleElementListCoinClick}
             fetchLoadData={this.fetchLoadData}
             handleSelectet={this.handleSelectet}
             handleSearch={this.handleSearch} />} 

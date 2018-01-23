@@ -204,6 +204,13 @@ background: linear-gradient(172deg,#747373,#040404)!important;
 }
 .card-image{
   background-color:"#4c4c4c";
+  width: 290px;
+  margin: 0%;
+  height: 100%;
+  padding: 0%;
+}
+.py-5{
+  height: 100%;
 }
 ::-webkit-scrollbar {
   width: 4px;

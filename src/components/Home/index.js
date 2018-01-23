@@ -1,7 +1,7 @@
 import React from 'react';
 import Loader from './Loader';
 import ListGenerator from './ListGenerator';
-
+import Board from './Board';
 import Search from './Search';
 const Home = entrie=>{
     var limitValue = entrie.state.limit;
@@ -30,27 +30,9 @@ const Home = entrie=>{
            <div className="left-search">            
            <Search limit={limitValue} state={entrie.state} handleSelectet={entrie.handleSelectet} handelSearch={entrie.handleSearch}/>          
            </div>
-           {limitValue!==data.length || data.length===0?<Loader/>:<ListGenerator props={data}/>}             
+           {limitValue!==data.length || data.length===0?<Loader/>:<ListGenerator props={data} handleElementListCoinClick={entrie.handleElementListCoinClick}/>}             
            </div> 
-           <div className="board-container">
-
-
-           <div className="card card-image">
-           
-              
-               <div className="text-white text-center d-flex align-items-center rgba-black-strong py-5 px-4">
-                   <div>
-                       <h5 className="pink-text"><i className="fa fa-pie-chart"></i>{entrie.limitValue}</h5>
-                       <h3 className="card-title pt-2"><strong>This is card title</strong></h3>
-                       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat fugiat, laboriosam, voluptatem,
-                           optio vero odio nam sit officia accusamus minus error nisi architecto nulla ipsum dignissimos.
-                           Odit sed qui, dolorum!.</p>
-                       <a className="btn btn-pink"><i className="fa fa-clone left"></i> View project</a>
-                   </div>
-               </div>
-               
-           </div>
-        </div>
+<Board state={entrie.state}/>
      </div>
  
     )
