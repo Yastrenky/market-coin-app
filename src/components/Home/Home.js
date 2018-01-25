@@ -32,7 +32,7 @@ const Home = entrie=>{
            </div>
            {limitValue!==data.length || data.length===0?<Loader/>:<ListGenerator props={data} handleElementListCoinClick={entrie.handleElementListCoinClick}/>}             
            </div> 
-<Board state={entrie.state}/>
+   <Board state={entrie.state} props={entrie}/>
      </div>
  
     )

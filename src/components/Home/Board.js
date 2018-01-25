@@ -1,11 +1,25 @@
 import React from 'react';
+import TradingViewWidget from 'react-tradingview-widget';
 
 const Board = props => {
+
     var button_text = "ADD TO FAVORITES";
+    var button_action= props.props.addToFavorites;
+    var button_color ="btn btn-blue hvr-float-shadow";
+    var button_icon = "fa  fa-star left";
     var selectedCoin = props.state.selectedCoin;
     var arrayList = props.state.all_data;
-    console.log(arrayList)
+
     var result = arrayList.find((e) => e.name.toLowerCase() === selectedCoin.toLowerCase());
+    var favorites = props.state.favorites;
+        if(result && favorites.indexOf(result.symbol) >= 0){
+            button_text = "REMOVE FROM FAVORITES";
+            button_action = props.props.removeFromFavorites;
+           button_color ="btn btn-red hvr-float-shadow";
+            button_icon = "fa  fa-remove left";
+        }
+
+    
 
     return (
 
@@ -17,17 +31,17 @@ const Board = props => {
                     {(result) ? <div>
                         <div className="coin-percent-change">
                             <span>
-                                <div>1H</div>
+                                <div>1H&nbsp;</div>
                                 <strong style={parseFloat(result.percent_change_1h) >= 0?{color:'green'}:{color:'red'}}>{
-                                    result.percent_change_1h.toString()}</strong>
+                                    result.percent_change_1h.toString()}%</strong>
                             </span>
                             <span>
-                                <div>24H</div>
-                                <strong style={parseFloat(result.percent_change_24h) >= 0?{color:'green'}:{color:'red'}}>{result.percent_change_24h.toString()}</strong>
+                                <div>24H&nbsp;</div>
+                                <strong style={parseFloat(result.percent_change_24h) >= 0?{color:'green'}:{color:'red'}}>{result.percent_change_24h.toString()}%</strong>
                             </span>
                             <span>
-                                <div>7D</div>
-                                <strong style={parseFloat(result.percent_change_7d) >= 0?{color:'green'}:{color:'red'}}>{result.percent_change_7d.toString()}</strong>
+                                <div>7D&nbsp;</div>
+                                <strong style={parseFloat(result.percent_change_7d) >= 0?{color:'green'}:{color:'red'}}>{result.percent_change_7d.toString()}%</strong>
                             </span>
                         </div>
                         <div className="text-white text-center d-flex align-items-center rgba-black-strong py-5 px-4">
@@ -40,11 +54,25 @@ const Board = props => {
                                 <p className=" pt-2">Total Supply: {result.total_supply} btc</p>
                                 <p className=" pt-2">Max Supply: {result.max_supply} btc</p>
 
-                                <div className="btn btn-blue hvr-float-shadow" ><i className="fa fa-clone left"></i> {button_text}</div>
+                                <div className={button_color} 
+                                value={result.symbol} 
+                                onClick={button_action}
+                                 >
+                                <i className={button_icon}></i> {button_text}</div>
+
                             </div>
                         </div></div> : null
                     }
+
+
                 </div>
+                <TradingViewWidget
+    symbol={(result)?(result.symbol+"USD"):("BTCUSD")}
+    theme="Dark"
+    locale="usa"
+    allow_symbol_change="false"
+    autosize
+  />
             </div>
 
 

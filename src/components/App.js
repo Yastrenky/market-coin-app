@@ -5,13 +5,14 @@ import HeaderNav from './HeaderNav';
 import SignUp from './SignUp';
 import SignIn from './SignIn'
 import Footer from './Footer';
-import Home from './Home'
+import Home from './Home/Home'
+import Favorites from './Favorites/Favorites'
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      favorites:[],
+      favorites:["BTC"],
       all_data: [],
       data: [],
       limit: 10,
@@ -22,11 +23,13 @@ class App extends Component {
     this.fetchLoadALLData = this.fetchLoadALLData.bind(this);
     this.handleSelectet = this.handleSelectet.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
-    this.handleElementListCoinClick = this.handleElementListCoinClick.bind(this)
+    this.handleElementListCoinClick = this.handleElementListCoinClick.bind(this);
+    this.addToFavorites=this.addToFavorites.bind(this);
+    this.removeFromFavorites= this.removeFromFavorites.bind(this);
   }
 
   fetchLoadData() {
-    // console.log("external access")
+    console.log("external access")
     var limit = this.state.limit;
     var urllimited = "https://api.coinmarketcap.com/v1/ticker/?limit=" + limit;
     fetch(urllimited, {
@@ -38,6 +41,7 @@ class App extends Component {
       .catch(e => e);
   }
   fetchLoadALLData() {
+    console.log("all data");
     var urllimited = "https://api.coinmarketcap.com/v1/ticker/?limit=1000";
     fetch(urllimited, {
       method: 'GET',
@@ -62,13 +66,27 @@ class App extends Component {
   handleElementListCoinClick(e){
 this.setState({selectedCoin:e.target.getAttribute("name")})
   }
+  addToFavorites(e){
+    var favorites = this.state.favorites;
+    favorites.push(e.target.getAttribute("value"));
+    this.setState({ favorites : favorites});
+  }
+  removeFromFavorites(e){
+    var favorites = this.state.favorites;
+    const index = favorites.indexOf(e.target.getAttribute("value"));
+    favorites.splice(index, 1);
+    this.setState({ favorites : favorites});
+  }
+  
   componentDidMount() {
+    
     this.fetchLoadData();
     this.fetchLoadALLData();
   }
-  render() {
 
-    console.log("Favorites: "+ this.state.favorites)
+  render() {
+   console.log(this.state.favorites)
+
 
 
     return (
@@ -82,11 +100,21 @@ this.setState({selectedCoin:e.target.getAttribute("name")})
           render={() => <Home
 
             state={this.state}
+            addToFavorites={this.addToFavorites}
+            removeFromFavorites={this.removeFromFavorites}
             handleElementListCoinClick={this.handleElementListCoinClick}
             fetchLoadData={this.fetchLoadData}
             handleSelectet={this.handleSelectet}
             handleSearch={this.handleSearch} />} 
             />
+          <Route path='/favorites' render={()=><Favorites
+          state={this.state}
+          removeFromFavorites={this.removeFromFavorites}
+          
+          />
+          } />
+          <Route path='/trade' component={SignIn} />
+          <Route path='/settings' component={SignIn} />
           <Route path='/sign-in' component={SignIn} />
           <Route path='/sign-up' component={SignUp} />
 

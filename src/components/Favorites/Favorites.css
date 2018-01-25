@@ -1,0 +1,35 @@
+.main-favorites-container{
+    display: flex;
+    justify-content: space-between;
+    height: 77%;
+    margin: 10px;
+padding-top: 2px;
+    
+}
+.favorite-card{
+
+    margin: 10px;
+
+    height: 247px;
+    background-color: #f7931a;
+    box-shadow: 0 4px 8px 0 rgba(235, 223, 223, 0.2);
+    transition: 0.3s;
+    border-radius: 5px;
+
+}
+.favorite-card:hover{
+    box-shadow: 0 8px 16px 0 rgba(235, 223, 223, 0.2);
+}
+.favorite-card-header{
+    float: right;
+    padding-right: 2px;
+    font-size: 22px;
+
+}
+.favorite-card-body{
+
+}
+.favorite-card-chart{
+    height: 87%;
+   
+}
