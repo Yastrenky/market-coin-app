@@ -55,7 +55,7 @@ const Board = props => {
                                 <p className=" pt-2">Max Supply: {result.max_supply} btc</p>
 
                                 <div className={button_color} 
-                                value={result.symbol} 
+                                id={result.symbol} 
                                 onClick={button_action}
                                  >
                                 <i className={button_icon}></i> {button_text}</div>

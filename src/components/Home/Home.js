@@ -23,18 +23,18 @@ const Home = entrie=>{
       data = array_result;
     }
 
-    return(
+    return (
 
-        <div className="main-coins-container">
+      <div className="main-coins-container">
         <div className="left-nav">
-           <div className="left-search">            
-           <Search limit={limitValue} state={entrie.state} handleSelectet={entrie.handleSelectet} handelSearch={entrie.handleSearch}/>          
-           </div>
-           {limitValue!==data.length || data.length===0?<Loader/>:<ListGenerator props={data} handleElementListCoinClick={entrie.handleElementListCoinClick}/>}             
-           </div> 
-   <Board state={entrie.state} props={entrie}/>
-     </div>
- 
+          <div className="left-search">            
+          <Search limit={limitValue} state={entrie.state} handleSelectet={entrie.handleSelectet} handelSearch={entrie.handleSearch}/>          
+          </div>
+          {limitValue!==data.length || data.length===0?<Loader/>:<ListGenerator props={data} handleElementListCoinClick={entrie.handleElementListCoinClick}/>}             
+        </div> 
+        <Board state={entrie.state} props={entrie}/>
+      </div>
+  
     )
 }
 

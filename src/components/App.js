@@ -5,14 +5,21 @@ import HeaderNav from './HeaderNav';
 import SignUp from './SignUp';
 import SignIn from './SignIn'
 import Footer from './Footer';
-import Home from './Home/Home'
-import Favorites from './Favorites/Favorites'
+import Home from './Home/Home';
+import Settings from './Settings/Settings'
+import Favorites from './Favorites/Favorites';
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      favorites:["BTC"],
+      user:{
+        user_name:"",
+        email:"",
+        password:""
+
+      },
+      favorites:["BTC", "ETH", "XRP", "BCH", "LTC", "EOS"],
       all_data: [],
       data: [],
       limit: 10,
@@ -29,7 +36,7 @@ class App extends Component {
   }
 
   fetchLoadData() {
-    console.log("external access")
+    // console.log("external access")
     var limit = this.state.limit;
     var urllimited = "https://api.coinmarketcap.com/v1/ticker/?limit=" + limit;
     fetch(urllimited, {
@@ -41,7 +48,7 @@ class App extends Component {
       .catch(e => e);
   }
   fetchLoadALLData() {
-    console.log("all data");
+    // console.log("all data");
     var urllimited = "https://api.coinmarketcap.com/v1/ticker/?limit=1000";
     fetch(urllimited, {
       method: 'GET',
@@ -68,14 +75,17 @@ this.setState({selectedCoin:e.target.getAttribute("name")})
   }
   addToFavorites(e){
     var favorites = this.state.favorites;
-    favorites.push(e.target.getAttribute("value"));
+    favorites.push(e.target.getAttribute("id"));
     this.setState({ favorites : favorites});
   }
   removeFromFavorites(e){
+    if(e.target.getAttribute("id")){
+    console.log("Element to erase: "+e.target.getAttribute("id"))
     var favorites = this.state.favorites;
-    const index = favorites.indexOf(e.target.getAttribute("value"));
+    const index = favorites.indexOf(e.target.getAttribute("id").toString());
     favorites.splice(index, 1);
     this.setState({ favorites : favorites});
+    }
   }
   
   componentDidMount() {
@@ -114,7 +124,7 @@ this.setState({selectedCoin:e.target.getAttribute("name")})
           />
           } />
           <Route path='/trade' component={SignIn} />
-          <Route path='/settings' component={SignIn} />
+          <Route path='/settings' component={Settings} />
           <Route path='/sign-in' component={SignIn} />
           <Route path='/sign-up' component={SignUp} />
 

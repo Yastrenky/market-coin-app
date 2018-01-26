@@ -1,0 +1,22 @@
+.main-settings-container{
+    /* display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around; */
+    height: 77%;
+    margin: 10px;
+    padding-top: 2px;
+    overflow-y:scroll;
+    overflow-x:hidden;
+    
+}
+
+.glyphicon {  margin-bottom: 10px;margin-right: 10px;}
+
+small {
+display: block;
+line-height: 1.428571429;
+color: #999;
+}
+.col-md-6 {
+    width: 50%;
+}
