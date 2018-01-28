@@ -24,22 +24,40 @@
     box-shadow: 0 8px 16px 0 rgba(235, 223, 223, 0.2);
 }
 .favorite-card-header{
+  
     align-items: center;
-    margin-right: 10px;
+    /* margin-right: 10px; */
     /* padding-right: 2px; */
     font-size: 22px;
     /* padding: 10px; */
     display: -ms-flexbox;
     display: flex;
     -ms-flex-pack: center;
-    justify-content: center;
+    justify-content: space-between;
     height: 45px;
     z-index: 99999;
     opacity: 0.8;
 
 }
-.favorite-card-body{
+.favorite-card-header span{
 
+   display: flex;
+   justify-content: center;
+   align-items: center;  
+   height: 100%;
+   width: 100%;
+}
+.favorite-card-header a{
+    color: #4c3b26;
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+    height: 100%;
+    width: 100%;
+    }
+.favorite-card-header span:hover{
+    cursor: auto;
+    border: 1px solid white;
 }
 .favorite-card-chart{
     height: 87%;

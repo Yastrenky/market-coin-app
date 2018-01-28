@@ -8,18 +8,24 @@ import Footer from './Footer';
 import Home from './Home/Home';
 import Settings from './Settings/Settings'
 import Favorites from './Favorites/Favorites';
+import Trade from './Trade/Trade';
+import auth from './Authentication/auth';
+ auth();
+
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      loged: true,
       user:{
         user_name:"",
         email:"",
-        password:""
-
+        password:"",
+        profile_date:"",
+        favorites:[]
       },
-      favorites:["BTC", "ETH", "XRP", "BCH", "LTC", "EOS"],
+      
       all_data: [],
       data: [],
       limit: 10,
@@ -33,8 +39,24 @@ class App extends Component {
     this.handleElementListCoinClick = this.handleElementListCoinClick.bind(this);
     this.addToFavorites=this.addToFavorites.bind(this);
     this.removeFromFavorites= this.removeFromFavorites.bind(this);
+    this.goToChart = this.goToChart.bind(this);
+    this.loadUserdData = this.loadUserdData.bind(this);
+    this.logout = this.logout.bind(this);
   }
-
+  loadUserdData(){
+    this.setState({
+      user:{
+        user_name:"Yastrenky",
+        email:"",
+        password:"",
+        favorites:["BTC", "ETH", "XEM", "EOS"],
+        date:"",
+        settings:"",
+      },
+      selectedCoin:"litecoin",
+      searchValue: ""
+    })
+  }
   fetchLoadData() {
     // console.log("external access")
     var limit = this.state.limit;
@@ -74,61 +96,72 @@ class App extends Component {
 this.setState({selectedCoin:e.target.getAttribute("name")})
   }
   addToFavorites(e){
-    var favorites = this.state.favorites;
+    var favorites = this.state.user.favorites;
     favorites.push(e.target.getAttribute("id"));
-    this.setState({ favorites : favorites});
+    this.setState({ user:{favorites : favorites}});
   }
   removeFromFavorites(e){
     if(e.target.getAttribute("id")){
     console.log("Element to erase: "+e.target.getAttribute("id"))
-    var favorites = this.state.favorites;
+    var favorites = this.state.user.favorites;
     const index = favorites.indexOf(e.target.getAttribute("id").toString());
     favorites.splice(index, 1);
-    this.setState({ favorites : favorites});
+    this.setState({ user:{favorites : favorites}});
     }
   }
-  
+  goToChart(e){
+
+    this.setState({selectedCoin : e.target.getAttribute("id")})
+  }
+  logout(){
+    this.setState({loged:false})
+  }
   componentDidMount() {
     
     this.fetchLoadData();
     this.fetchLoadALLData();
+    this.setState(this.loadUserdData())
   }
 
   render() {
-   console.log(this.state.favorites)
+// console.log(this.state)
 
 
 
     return (
-  
+        
       <div className="app-container">
-        <Header />
+        <Header state = {this.state.user} user ={this.state.loged} logout = {this.logout} />
+
+        {(this.state.loged)?<span>
         <HeaderNav />
 
         <Switch>
           <Route exact path='/' 
           render={() => <Home
-
             state={this.state}
             addToFavorites={this.addToFavorites}
             removeFromFavorites={this.removeFromFavorites}
             handleElementListCoinClick={this.handleElementListCoinClick}
             fetchLoadData={this.fetchLoadData}
             handleSelectet={this.handleSelectet}
-            handleSearch={this.handleSearch} />} 
+            handleSearch={this.handleSearch}          
+            />}           
             />
           <Route path='/favorites' render={()=><Favorites
           state={this.state}
           removeFromFavorites={this.removeFromFavorites}
-          
+          goToChart={this.goToChart}
           />
           } />
-          <Route path='/trade' component={SignIn} />
-          <Route path='/settings' component={Settings} />
+          <Route path='/trade' component={Trade} />
+          <Route path='/settings' render={()=><Settings state = {this.state}/>} />
           <Route path='/sign-in' component={SignIn} />
           <Route path='/sign-up' component={SignUp} />
 
         </Switch>
+        </span>:<SignIn/>
+  }
         <Footer />
       </div>
     );

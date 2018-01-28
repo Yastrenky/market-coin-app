@@ -11,7 +11,7 @@ const Board = props => {
     var arrayList = props.state.all_data;
 
     var result = arrayList.find((e) => e.name.toLowerCase() === selectedCoin.toLowerCase());
-    var favorites = props.state.favorites;
+    var favorites = props.state.user.favorites;
         if(result && favorites.indexOf(result.symbol) >= 0){
             button_text = "REMOVE FROM FAVORITES";
             button_action = props.props.removeFromFavorites;

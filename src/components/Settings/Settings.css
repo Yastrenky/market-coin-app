@@ -1,22 +1,58 @@
 .main-settings-container{
-    /* display: flex;
+    height: 79%;    
+    padding-left: 10%;
+    padding-right: 10%;
+}
+.profile_container{
+    display: flex;
+    -ms-flex-wrap: wrap;
     flex-wrap: wrap;
-    justify-content: space-around; */
-    height: 77%;
-    margin: 10px;
-    padding-top: 2px;
-    overflow-y:scroll;
-    overflow-x:hidden;
+    -ms-flex-line-pack: center;
+    align-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    margin: 20px;
+    height: 600px;
+    width: 94%;
+    border-radius:10px ;
+    background: rgba(209,209,209,1);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(209,209,209,1)), color-stop(50%, rgba(219,219,219,0.97)), color-stop(99%, rgba(252,252,252,0.94)), color-stop(100%, rgba(226,226,226,0.94)));
+    background: -webkit-linear-gradient(top, rgba(209,209,209,1) 0%, rgba(219,219,219,0.97) 50%, rgba(252,252,252,0.94) 99%, rgba(226,226,226,0.94) 100%);
+    background: -o-linear-gradient(top, rgba(209,209,209,1) 0%, rgba(219,219,219,0.97) 50%, rgba(252,252,252,0.94) 99%, rgba(226,226,226,0.94) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, from(rgba(209,209,209,1)), color-stop(50%, rgba(219,219,219,0.97)), color-stop(99%, rgba(252,252,252,0.94)), to(rgba(226,226,226,0.94)));
+    background: linear-gradient(to bottom, rgba(209, 209, 209, 0.96) 0%, rgba(219,219,219,0.97) 50%, rgba(252, 252, 252, 0.05) 99%, rgba(226, 226, 226, 0) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d1d1d1', endColorstr='#e2e2e2', GradientType=0 );
+}
+.column1{
+    display: flex;
+    flex: 2;
+  align-items: center;
+    height:100%;
+    flex-direction: column;
+}
+.column1 p{
+    font-family: 'Kavivanar', cursive;
+    margin-left: 20px;
+}
+.column2{
+    display: flex;
+    flex: 6;
+    width: 200px;
+    height:100%;
     
 }
 
-.glyphicon {  margin-bottom: 10px;margin-right: 10px;}
-
-small {
-display: block;
-line-height: 1.428571429;
-color: #999;
-}
-.col-md-6 {
-    width: 50%;
+.image_profile{
+    font-size: 190px;
+    height: 190px;
+    width: 190px;
+    background-color: white;
+    margin: 10px;
+    border: solid 1px #555;
+    background-color: #eed;
+    box-shadow: 10px -10px rgba(0,0,0,0.6);
+    -moz-box-shadow: 10px -10px rgba(0,0,0,0.6);
+    -webkit-box-shadow: 8px 8px 17px 2px rgba(0,0,0,0.6);
+    -o-box-shadow: 10px -10px rgba(0,0,0,0.6);
+    border-radius: 100px;
 }

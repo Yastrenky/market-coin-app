@@ -1,0 +1,33 @@
+.trade-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 77%;
+    margin: 10px;
+    padding-top: 2px;
+    color:white;
+}
+.trade-container-card{
+    background-color: rgba(241, 244, 241, 0.01);
+    
+    padding: 50px;
+    justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    width:500px;
+
+    margin: 13px;
+    display: flex;
+    flex-wrap: wrap;
+    font-family: 'Kavivanar', cursive;
+    font-size: 19px;
+}
+.under_construction{
+    /* filter: blur(5px); */
+    height: 134px;
+    width: 135px;
+    background-position: center;
+    background-size: 130px;
+    background-repeat: no-repeat;
+    background-image: url(./Under_Construction.png)
+}
