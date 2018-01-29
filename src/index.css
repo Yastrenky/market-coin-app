@@ -62,7 +62,7 @@ background: linear-gradient(172deg,#747373,#040404)!important;
   -ms-flex-pack: center;
   justify-content: space-between;
   height: 100%;
-  width: 242px;
+  width: 333px;
   margin-right: 17px;
 }
 .form-control{
@@ -172,6 +172,27 @@ background: linear-gradient(172deg,#747373,#040404)!important;
 .custom-select{
 
       height: calc(2.25rem + -5px);
+}
+.header-user-image{
+ border-radius: 100px;
+  background-image: url(https://scontent.xx.fbcdn.net/v/t1.0-1/c1.0.100.100/p100x100/15589506_19324…_2658282152051112693_n.jpg?oh=539470d…&oe=5AEF46DB);
+  height:45px;
+  width: 45px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
+
+}
+#facebook-official{
+  position: absolute;
+  left: 42px;
+  font-size: 28px;
+}
+.user-conected{
+  width: 300px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center
 }
 .footer{
   display: flex;

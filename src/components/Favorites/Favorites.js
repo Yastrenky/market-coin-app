@@ -9,11 +9,13 @@ class Favorites extends Component {
     }
    findName(params) {
        var value = "";
-       var result = this.props.state.all_data.map(e=>{
+       
+      this.props.state.all_data.map((e)=>{
         if(e.symbol===params){
             value = e.name
 
         }});
+
         return value;
         
     }
@@ -22,7 +24,7 @@ class Favorites extends Component {
         return (<div className="main-favorites-container">
 
             {
-                this.props.state.user.favorites.map((e) => {
+                this.props.state.favorites.map((e) => {
                     return (
                         <div key={e} className="favorite-card"  >
                             <div className="favorite-card-header" >
