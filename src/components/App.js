@@ -9,24 +9,12 @@ import Home from './Home/Home';
 import Settings from './Settings/Settings'
 import Favorites from './Favorites/Favorites';
 import Trade from './Trade/Trade';
-import  firebase from "firebase";
+import firebase from "firebase";
+import config from './firebase_config/config';
 
-
-
-
-
-var config = {
-  apiKey: "AIzaSyCmcY1tIS2rlnZfCmFguEiIw4hLU358geM",
-  authDomain: "market-coin-2d7ca.firebaseapp.com",
-  databaseURL: "https://market-coin-2d7ca.firebaseio.com",
-  projectId: "market-coin-2d7ca",
-  storageBucket: "market-coin-2d7ca.appspot.com",
-  messagingSenderId: "605229967128"
-};
-firebase.initializeApp(config);
+firebase.initializeApp(config());
 const auth = firebase.auth
 const provider = new firebase.auth.FacebookAuthProvider();
-
 
 class App extends Component {
   constructor(props) {
@@ -34,20 +22,20 @@ class App extends Component {
 
     this.state = {
       loged: false,
-      favorites:[],
-      user:{
-        user_name:"",
-        email:"",
-        password:"",
-        profile_date:"",
-        
-        photoURL:"",
+      favorites: [],
+      user: {
+        user_name: "",
+        email: "",
+        password: "",
+        profile_date: "",
+        facebook_id: "",
+        photoURL: "",
       },
-      
+
       all_data: [],
       data: [],
       limit: 10,
-      selectedCoin:"bitcoin",
+      selectedCoin: "bitcoin",
       searchValue: ""
     }
     this.fetchLoadData = this.fetchLoadData.bind(this);
@@ -55,39 +43,47 @@ class App extends Component {
     this.handleSelectet = this.handleSelectet.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
     this.handleElementListCoinClick = this.handleElementListCoinClick.bind(this);
-    this.addToFavorites=this.addToFavorites.bind(this);
-    this.removeFromFavorites= this.removeFromFavorites.bind(this);
+    this.addToFavorites = this.addToFavorites.bind(this);
+    this.removeFromFavorites = this.removeFromFavorites.bind(this);
     this.goToChart = this.goToChart.bind(this);
     // this.loadUserdData = this.loadUserdData.bind(this);
     this.logout = this.logout.bind(this);
   }
   async login() {
-    const self =this;
-    await auth().signInWithPopup(provider).then(function(result) {
-console.log(result);
-    self.setState({
-      loged:true,
-      favorites:["BTC", "ETH", "XEM", "EOS"],
-      user:{
-        user_name:result.user.displayName,
-        email:"",
-        password:"",
-       
-        date:"",
-        settings:"",
-        photoURL:result.user.photoURL,
-      }
-    })
-  }).catch(function(error) {
-    // Handle Errors here.
-    // var errorCode = error.code;
-    // var errorMessage = error.message;
-    // The email of the user's account used.
-    // var email = error.email;
-    // The firebase.auth.AuthCredential type that was used.
-    // var credential = error.credential;
-    // ...
-  });
+    const self = this;
+    await auth().signInWithPopup(provider).then(function (result) {
+      // console.log(result);
+
+
+
+
+
+
+
+
+      self.setState({
+        loged: true,
+        favorites: ["BTC", "ETH", "XEM", "EOS"],
+        user: {
+          user_name: result.user.displayName,
+          email: "",
+          password: "",
+          facebook_id: result.user.uid,
+          date: "",
+          settings: "",
+          photoURL: result.user.photoURL,
+        }
+      })
+    }).catch(function (error) {
+      // Handle Errors here.
+      // var errorCode = error.code;
+      // var errorMessage = error.message;
+      // The email of the user's account used.
+      // var email = error.email;
+      // The firebase.auth.AuthCredential type that was used.
+      // var credential = error.credential;
+      // ...
+    });
   }
   // loadUserdData(){
   //   this.setState({
@@ -138,81 +134,99 @@ console.log(result);
     this.setState({ limit: parseFloat(e.target.value) });
 
   }
-  handleElementListCoinClick(e){
-this.setState({selectedCoin:e.target.getAttribute("name")})
+  handleElementListCoinClick(e) {
+    this.setState({ selectedCoin: e.target.getAttribute("name") })
   }
-  addToFavorites(e){
+  addToFavorites(e) {
+
+
+
+    const self = this;
     var favorites = this.state.favorites;
     favorites.push(e.target.getAttribute("id"));
-    this.setState({ favorites : favorites});
+
+    firebase.database().ref().push({
+
+      username: String(self.state.user.user_name),
+      facebook_id: String(self.state.user.facebook_id),
+      favorites: favorites,
+
+    })
+      .then(res => console.log(res));
+
+    this.setState({ favorites: favorites });
   }
-  removeFromFavorites(e){
-    if(e.target.getAttribute("id")){
-    console.log("Element to erase: "+e.target.getAttribute("id"))
-    var favorites = this.state.favorites;
-    const index = favorites.indexOf(e.target.getAttribute("id").toString());
-    favorites.splice(index, 1);
-    this.setState({ favorites : favorites});
+  removeFromFavorites(e) {
+    if (e.target.getAttribute("id")) {
+      console.log("Element to erase: " + e.target.getAttribute("id"))
+      var favorites = this.state.favorites;
+      const index = favorites.indexOf(e.target.getAttribute("id").toString());
+      favorites.splice(index, 1);
+      this.setState({ favorites: favorites });
     }
   }
-  goToChart(e){
+  goToChart(e) {
 
-    this.setState({selectedCoin : e.target.getAttribute("id")})
+    this.setState({ selectedCoin: e.target.getAttribute("id") })
   }
-  logout(){
-    firebase.auth().signOut().then(function() {
+  logout() {
+    const self = this;
+    console.log("out")
+    firebase.auth().signOut().then(function () {
+      console.log("out");
+      self.setState({ loged: false })
       // Sign-out successful.
-    }).catch(function(error) {
+    }).catch(function (error) {
       console.log(error);
     });
-    this.setState({loged:false})
+
   }
   componentDidMount() {
-    
+
     this.fetchLoadData();
     this.fetchLoadALLData();
     // this.setState(this.loadUserdData())
   }
 
   render() {
-console.log(this.state)
+    console.log(this.state)
 
 
 
     return (
-        
+
       <div className="app-container">
-        <Header state = {this.state.user} user ={this.state.loged} logout = {this.logout} />
+        <Header state={this.state.user} user={this.state.loged} logout={this.logout} />
 
-        {(this.state.loged)?<span>
-        <HeaderNav />
+        {(this.state.loged) ? <span>
+          <HeaderNav />
 
-        <Switch>
-          <Route exact path='/' 
-          render={() => <Home
-            state={this.state}
-            addToFavorites={this.addToFavorites}
-            removeFromFavorites={this.removeFromFavorites}
-            handleElementListCoinClick={this.handleElementListCoinClick}
-            fetchLoadData={this.fetchLoadData}
-            handleSelectet={this.handleSelectet}
-            handleSearch={this.handleSearch}          
-            />}           
+          <Switch>
+            <Route exact path='/'
+              render={() => <Home
+                state={this.state}
+                addToFavorites={this.addToFavorites}
+                removeFromFavorites={this.removeFromFavorites}
+                handleElementListCoinClick={this.handleElementListCoinClick}
+                fetchLoadData={this.fetchLoadData}
+                handleSelectet={this.handleSelectet}
+                handleSearch={this.handleSearch}
+              />}
             />
-          <Route path='/favorites' render={()=><Favorites
-          state={this.state}
-          removeFromFavorites={this.removeFromFavorites}
-          goToChart={this.goToChart}
-          />
-          } />
-          <Route path='/trade' component={Trade} />
-          <Route path='/settings' render={()=><Settings state = {this.state}/>} />
-          <Route path='/sign-in' render={()=><SignIn login = {this.login.bind(this)}/>} />
-          <Route path='/sign-up' component={SignUp} />
+            <Route path='/favorites' render={() => <Favorites
+              state={this.state}
+              removeFromFavorites={this.removeFromFavorites}
+              goToChart={this.goToChart}
+            />
+            } />
+            <Route path='/trade' component={Trade} />
+            <Route path='/settings' render={() => <Settings state={this.state} />} />
+            <Route path='/sign-in' render={() => <SignIn login={this.login.bind(this)} />} />
+            <Route path='/sign-up' component={SignUp} />
 
-        </Switch>
-        </span>:<SignIn login = {this.login.bind(this)}/>
-  }
+          </Switch>
+        </span> : <SignIn login={this.login.bind(this)} />
+        }
         <Footer />
       </div>
     );
