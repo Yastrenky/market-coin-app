@@ -75,30 +75,10 @@ class App extends Component {
         }
       })
     }).catch(function (error) {
-      // Handle Errors here.
-      // var errorCode = error.code;
-      // var errorMessage = error.message;
-      // The email of the user's account used.
-      // var email = error.email;
-      // The firebase.auth.AuthCredential type that was used.
-      // var credential = error.credential;
-      // ...
+
     });
   }
-  // loadUserdData(){
-  //   this.setState({
-  //     user:{
-  //       user_name:"Yastrenky",
-  //       email:"",
-  //       password:"",
-  //       favorites:["BTC", "ETH", "XEM", "EOS"],
-  //       date:"",
-  //       settings:"",
-  //     },
-  //     selectedCoin:"litecoin",
-  //     searchValue: ""
-  //   })
-  // }
+
   fetchLoadData() {
     // console.log("external access")
     var limit = this.state.limit;
