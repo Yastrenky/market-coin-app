@@ -7,17 +7,16 @@ class Favorites extends Component {
     state = {
         const_id: ""
     }
-   findName(params) {
-       var value = "";
-       
-      this.props.state.all_data.map((e)=>{
-        if(e.symbol===params){
-            value = e.name
+    findName(params) {
+        var value = "";
 
-        }});
+        this.props.state.all_data.forEach(e => {
+            if (e.symbol === params) {
+                value = e.name
+            }
+        });
 
         return value;
-        
     }
 
     render() {
@@ -28,7 +27,7 @@ class Favorites extends Component {
                     return (
                         <div key={e} className="favorite-card"  >
                             <div className="favorite-card-header" >
-                            <Link to='/'><span className="fa fa-area-chart" id={this.findName(e)} onClick={this.props.goToChart}></span></Link>
+                                <Link to='/'><span className="fa fa-area-chart" id={this.findName(e)} onClick={this.props.goToChart}></span></Link>
                                 <span className="fa  fa-remove" id={e} onClick={this.props.removeFromFavorites}></span>
 
                             </div>

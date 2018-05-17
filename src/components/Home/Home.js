@@ -13,7 +13,7 @@ const Home = entrie=>{
     }
     if (all_data.length !== 0 && searchValue.length !== 0) {
       var array_result = []
-      all_data.map(elem => {
+      all_data.forEach(elem => {
         if ((elem.name.toLowerCase()).includes(searchValue.toLowerCase())) {
           array_result.push(elem)
         }

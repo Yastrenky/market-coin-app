@@ -21,10 +21,10 @@ class App extends Component {
     super(props);
 
     this.state = {
-      loged: false,
-      favorites: [],
+      loged: true,
+      favorites: ["BTC", "ETH", "XEM", "EOS"],
       user: {
-        user_name: "",
+        user_name: "GUEST",
         email: "",
         password: "",
         profile_date: "",
@@ -52,14 +52,7 @@ class App extends Component {
   async login() {
     const self = this;
     await auth().signInWithPopup(provider).then(function (result) {
-      // console.log(result);
-
-
-
-
-
-
-
+      console.log(result);
 
       self.setState({
         loged: true,
@@ -119,15 +112,13 @@ class App extends Component {
   }
   addToFavorites(e) {
 
-
-
     const self = this;
     var favorites = this.state.favorites;
     favorites.push(e.target.getAttribute("id"));
 
     firebase.database().ref().push({
 
-      username: String(self.state.user.user_name),
+      username: String(self.state.user.user_name) || "Guest",
       facebook_id: String(self.state.user.facebook_id),
       favorites: favorites,
 
@@ -169,7 +160,7 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state)
+    // console.log(this.state)
 
 
 
