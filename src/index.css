@@ -60,10 +60,7 @@ background: linear-gradient(172deg,#747373,#040404)!important;
   -ms-flex-align: center;
   align-items: center;
   -ms-flex-pack: center;
-  justify-content: space-between;
   height: 100%;
-  width: 333px;
-  margin-right: 17px;
 }
 .form-control{
   display: block;
@@ -189,7 +186,7 @@ background: linear-gradient(172deg,#747373,#040404)!important;
   font-size: 28px;
 }
 .user-conected{
-  width: 300px;
+  width: 140px;
   display: flex;
   justify-content: space-between;
   align-items: center

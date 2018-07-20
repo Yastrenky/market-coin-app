@@ -168,8 +168,6 @@ class App extends Component {
 
       <div className="app-container">
         <Header state={this.state.user} user={this.state.loged} logout={this.logout} />
-
-        {(this.state.loged) ? <span>
           <HeaderNav />
 
           <Switch>
@@ -196,8 +194,6 @@ class App extends Component {
             <Route path='/sign-up' component={SignUp} />
 
           </Switch>
-        </span> : <SignIn login={this.login.bind(this)} />
-        }
         <Footer />
       </div>
     );

@@ -24,7 +24,7 @@ const Header = entrie => {
                                 <i className="fa fa-user-circle user-image" aria-hidden="true" />
                             }
                             <span>{entrie.state.user_name}</span>&nbsp;&nbsp;&nbsp;
-                            <span id="logout" className="badge badge-primary" onClick={entrie.logout}><p>Log out</p></span>
+                            {/* <span id="logout" className="badge badge-primary" onClick={entrie.logout}><p>Log out</p></span> */}
                         
                 
                     </div> : null
