@@ -10,7 +10,7 @@ class Favorites extends Component {
     findName(params) {
         var value = "";
 
-        this.props.state.all_data.forEach(e => {
+        this.props.state.data.forEach(e => {
             if (e.symbol === params) {
                 value = e.name
             }

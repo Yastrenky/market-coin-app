@@ -39,7 +39,6 @@ class App extends Component {
       searchValue: ""
     }
     this.fetchLoadData = this.fetchLoadData.bind(this);
-    this.fetchLoadALLData = this.fetchLoadALLData.bind(this);
     this.handleSelectet = this.handleSelectet.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
     this.handleElementListCoinClick = this.handleElementListCoinClick.bind(this);
@@ -52,8 +51,6 @@ class App extends Component {
   async login() {
     const self = this;
     await auth().signInWithPopup(provider).then(function (result) {
-      console.log(result);
-
       self.setState({
         loged: true,
         favorites: ["BTC", "ETH", "XEM", "EOS"],
@@ -75,41 +72,30 @@ class App extends Component {
   fetchLoadData() {
     // console.log("external access")
     var limit = this.state.limit;
-    var urllimited = "https://api.coinmarketcap.com/v1/ticker/?limit=" + limit;
-    fetch(urllimited, {
+    const qr = `?limit=${limit}`
+    var urllimited = "/coin-data";
+    fetch(urllimited + qr, {
       method: 'GET',
-
-
+      headers: {
+        'Accept': 'application/json',
+        'Accept-Charset': 'utf-8',
+        'Accept-Encoding': 'deflate, gzip'
+      }
     }).then(response => response.json())
-      .then(newData => this.setState({ data: newData }))
-      .catch(e => e);
+      .then(({ data }) => this.setState({ data }))
+      .catch(e => console.log(e));
   }
-  fetchLoadALLData() {
-    // console.log("all data");
-    var urllimited = "https://api.coinmarketcap.com/v1/ticker/?limit=1000";
-    fetch(urllimited, {
-      method: 'GET',
 
-
-    })
-      .then(response => response.json())
-      .then(newData => this.setState({ all_data: newData }))
-      .catch(e => e);
-  }
   handleSearch(e) {
-
     this.setState({
       searchValue: e.target.value,
+    })
+  }
 
-    });
-  }
-  handleSelectet(e) {
-    this.setState({ limit: parseFloat(e.target.value) });
+  handleSelectet(e) { this.setState({ limit: parseFloat(e.target.value) }, ()=> this.fetchLoadData()) }
 
-  }
-  handleElementListCoinClick(e) {
-    this.setState({ selectedCoin: e.target.getAttribute("name") })
-  }
+  handleElementListCoinClick(e) { this.setState({ selectedCoin: e.target.getAttribute("name") }) }
+
   addToFavorites(e) {
 
     const self = this;
@@ -140,6 +126,7 @@ class App extends Component {
 
     this.setState({ selectedCoin: e.target.getAttribute("id") })
   }
+
   logout() {
     const self = this;
     console.log("out")
@@ -152,48 +139,42 @@ class App extends Component {
     });
 
   }
-  componentDidMount() {
 
+  componentDidMount() {
     this.fetchLoadData();
-    this.fetchLoadALLData();
-    // this.setState(this.loadUserdData())
   }
 
   render() {
-    // console.log(this.state)
-
-
-
     return (
 
       <div className="app-container">
         <Header state={this.state.user} user={this.state.loged} logout={this.logout} />
-          <HeaderNav />
+        <HeaderNav />
 
-          <Switch>
-            <Route exact path='/'
-              render={() => <Home
-                state={this.state}
-                addToFavorites={this.addToFavorites}
-                removeFromFavorites={this.removeFromFavorites}
-                handleElementListCoinClick={this.handleElementListCoinClick}
-                fetchLoadData={this.fetchLoadData}
-                handleSelectet={this.handleSelectet}
-                handleSearch={this.handleSearch}
-              />}
-            />
-            <Route path='/favorites' render={() => <Favorites
+        <Switch>
+          <Route exact path='/'
+            render={() => <Home
               state={this.state}
+              addToFavorites={this.addToFavorites}
               removeFromFavorites={this.removeFromFavorites}
-              goToChart={this.goToChart}
-            />
-            } />
-            <Route path='/trade' component={Trade} />
-            <Route path='/settings' render={() => <Settings state={this.state} />} />
-            <Route path='/sign-in' render={() => <SignIn login={this.login.bind(this)} />} />
-            <Route path='/sign-up' component={SignUp} />
+              handleElementListCoinClick={this.handleElementListCoinClick}
+              fetchLoadData={this.fetchLoadData}
+              handleSelectet={this.handleSelectet}
+              handleSearch={this.handleSearch}
+            />}
+          />
+          <Route path='/favorites' render={() => <Favorites
+            state={this.state}
+            removeFromFavorites={this.removeFromFavorites}
+            goToChart={this.goToChart}
+          />
+          } />
+          <Route path='/trade' component={Trade} />
+          <Route path='/settings' render={() => <Settings state={this.state} />} />
+          <Route path='/sign-in' render={() => <SignIn login={this.login.bind(this)} />} />
+          <Route path='/sign-up' component={SignUp} />
 
-          </Switch>
+        </Switch>
         <Footer />
       </div>
     );

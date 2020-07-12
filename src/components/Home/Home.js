@@ -6,23 +6,6 @@ import Search from './Search';
 const Home = entrie=>{
     var limitValue = entrie.state.limit;
     var data = entrie.state.data;
-    var all_data = entrie.state.all_data;
-    var searchValue = entrie.state.searchValue;
-    if (limitValue !== data.length) {
-      entrie.fetchLoadData();
-    }
-    if (all_data.length !== 0 && searchValue.length !== 0) {
-      var array_result = []
-      all_data.forEach(elem => {
-        if ((elem.name.toLowerCase()).includes(searchValue.toLowerCase())) {
-          array_result.push(elem)
-        }
-
-      })
-      limitValue = array_result.length;
-      data = array_result;
-    }
-
     return (
 
       <div className="main-coins-container">

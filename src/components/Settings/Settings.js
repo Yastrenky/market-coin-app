@@ -1,8 +1,6 @@
 import React from 'react';
 import './Settings.css';
 const Settings = entrie => {
-    console.log(entrie)
-
     return (
 
         <div className="main-settings-container">
