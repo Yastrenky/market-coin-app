@@ -7,28 +7,24 @@ class Favorites extends Component {
     state = {
         const_id: ""
     }
-    findName(params) {
-        var value = "";
 
-        this.props.state.data.forEach(e => {
-            if (e.symbol === params) {
-                value = e.name
-            }
-        });
-
-        return value;
+    findName = (params) => {
+        const { data } = this.props
+        const foundElem = data.find(e => e.symbol === params)
+        return foundElem ? foundElem.name : ""
     }
 
     render() {
-        return (<div className="main-favorites-container">
+        const { props: { favorites, goToChart, removeFromFavorites }, findName } = this
 
+        return (<div className="main-favorites-container">
             {
-                this.props.state.favorites.map((e) => {
+                favorites.map((e) => {
                     return (
                         <div key={e} className="favorite-card"  >
                             <div className="favorite-card-header" >
-                                <Link to='/'><span className="fa fa-area-chart" id={this.findName(e)} onClick={this.props.goToChart}></span></Link>
-                                <span className="fa  fa-remove" id={e} onClick={this.props.removeFromFavorites}></span>
+                                <Link to='/coin'><span className="fa fa-area-chart" id={findName(e)} onClick={goToChart}></span></Link>
+                                <span className="fa  fa-remove" id={e} onClick={removeFromFavorites}></span>
 
                             </div>
                             <div className="favorite-card-chart">
@@ -37,11 +33,8 @@ class Favorites extends Component {
                         </div>
                     );
                 })}
-
-
         </div>);
     }
-
 }
 
 export default Favorites;

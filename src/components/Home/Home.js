@@ -3,22 +3,31 @@ import Loader from './Loader';
 import ListGenerator from './ListGenerator';
 import Board from './Board';
 import Search from './Search';
-const Home = entrie=>{
-    var limitValue = entrie.state.limit;
-    var data = entrie.state.data;
-    return (
+const Home = ({
+  data,
+  favorites,
+  limit,
+  addToFavorites,
+  removeFromFavorites,
+  handleElementListCoinClick,
+  handleSelectet,
+  handleSearch,
+  searchValue,
+  selectedCoin
+}) => {
+  return (
 
-      <div className="main-coins-container">
-        <div className="left-nav">
-          <div className="left-search">            
-          <Search limit={limitValue} state={entrie.state} handleSelectet={entrie.handleSelectet} handelSearch={entrie.handleSearch}/>          
-          </div>
-          {limitValue!==data.length || data.length===0?<Loader/>:<ListGenerator props={data} handleElementListCoinClick={entrie.handleElementListCoinClick}/>}             
-        </div> 
-        <Board state={entrie.state} props={entrie}/>
+    <div className="main-coins-container">
+      <div className="left-nav">
+        <div className="left-search">
+          <Search {...{ limit, searchValue, handleSearch, handleSelectet }} />
+        </div>
+        {data.length === 0 ? <Loader /> : <ListGenerator {...{ data, handleElementListCoinClick }} />}
       </div>
-  
-    )
+      <Board {...{ data, favorites, addToFavorites, removeFromFavorites, selectedCoin }} />
+    </div>
+
+  )
 }
 
 export default Home;

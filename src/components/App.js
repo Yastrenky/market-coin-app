@@ -2,79 +2,31 @@ import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom'
 import Header from './Header';
 import HeaderNav from './HeaderNav';
-import SignUp from './SignUp';
-import SignIn from './SignIn'
 import Footer from './Footer';
 import Home from './Home/Home';
-import Settings from './Settings/Settings'
 import Favorites from './Favorites/Favorites';
 import Trade from './Trade/Trade';
-import firebase from "firebase";
-import config from './firebase_config/config';
-
-firebase.initializeApp(config());
-const auth = firebase.auth
-const provider = new firebase.auth.FacebookAuthProvider();
 
 class App extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
-      loged: true,
-      favorites: ["BTC", "ETH", "XEM", "EOS"],
-      user: {
-        user_name: "GUEST",
-        email: "",
-        password: "",
-        profile_date: "",
-        facebook_id: "",
-        photoURL: "",
-      },
-
-      all_data: [],
+      favorites: ["BTC", "ETH"],
       data: [],
       limit: 10,
       selectedCoin: "bitcoin",
       searchValue: ""
     }
-    this.fetchLoadData = this.fetchLoadData.bind(this);
-    this.handleSelectet = this.handleSelectet.bind(this);
-    this.handleSearch = this.handleSearch.bind(this);
-    this.handleElementListCoinClick = this.handleElementListCoinClick.bind(this);
-    this.addToFavorites = this.addToFavorites.bind(this);
-    this.removeFromFavorites = this.removeFromFavorites.bind(this);
-    this.goToChart = this.goToChart.bind(this);
-    // this.loadUserdData = this.loadUserdData.bind(this);
-    this.logout = this.logout.bind(this);
-  }
-  async login() {
-    const self = this;
-    await auth().signInWithPopup(provider).then(function (result) {
-      self.setState({
-        loged: true,
-        favorites: ["BTC", "ETH", "XEM", "EOS"],
-        user: {
-          user_name: result.user.displayName,
-          email: "",
-          password: "",
-          facebook_id: result.user.uid,
-          date: "",
-          settings: "",
-          photoURL: result.user.photoURL,
-        }
-      })
-    }).catch(function (error) {
-
-    });
   }
 
-  fetchLoadData() {
-    // console.log("external access")
-    var limit = this.state.limit;
+  fetchLoadData = () => {
+    const { state: { limit } } = this
+
     const qr = `?limit=${limit}`
-    var urllimited = "/coin-data";
-    fetch(urllimited + qr, {
+    const url = "http://localhost/coin-data"
+
+    fetch(url + qr, {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
@@ -86,34 +38,19 @@ class App extends Component {
       .catch(e => console.log(e));
   }
 
-  handleSearch(e) {
-    this.setState({
-      searchValue: e.target.value,
-    })
-  }
+  handleSearch = (e) => { this.setState({ searchValue: e.target.value }) }
 
-  handleSelectet(e) { this.setState({ limit: parseFloat(e.target.value) }, ()=> this.fetchLoadData()) }
+  handleSelectet = (e) => { this.setState({ limit: parseFloat(e.target.value) }, () => this.fetchLoadData()) }
 
-  handleElementListCoinClick(e) { this.setState({ selectedCoin: e.target.getAttribute("name") }) }
+  handleElementListCoinClick = (e) => { this.setState({ selectedCoin: e.target.getAttribute("name") }) }
 
-  addToFavorites(e) {
-
-    const self = this;
+  addToFavorites = (e) => {
     var favorites = this.state.favorites;
-    favorites.push(e.target.getAttribute("id"));
-
-    firebase.database().ref().push({
-
-      username: String(self.state.user.user_name) || "Guest",
-      facebook_id: String(self.state.user.facebook_id),
-      favorites: favorites,
-
-    })
-      .then(res => console.log(res));
-
-    this.setState({ favorites: favorites });
+    favorites.push(e.target.getAttribute("id"))
+    this.setState({ favorites: favorites })
   }
-  removeFromFavorites(e) {
+
+  removeFromFavorites = (e) => {
     if (e.target.getAttribute("id")) {
       console.log("Element to erase: " + e.target.getAttribute("id"))
       var favorites = this.state.favorites;
@@ -122,22 +59,9 @@ class App extends Component {
       this.setState({ favorites: favorites });
     }
   }
-  goToChart(e) {
 
+  goToChart = (e) => {
     this.setState({ selectedCoin: e.target.getAttribute("id") })
-  }
-
-  logout() {
-    const self = this;
-    console.log("out")
-    firebase.auth().signOut().then(function () {
-      console.log("out");
-      self.setState({ loged: false })
-      // Sign-out successful.
-    }).catch(function (error) {
-      console.log(error);
-    });
-
   }
 
   componentDidMount() {
@@ -145,35 +69,40 @@ class App extends Component {
   }
 
   render() {
+    const { state: { data, limit, favorites, searchValue, selectedCoin, }, addToFavorites, removeFromFavorites, handleElementListCoinClick, handleSelectet, handleSearch, goToChart } = this
     return (
 
       <div className="app-container">
-        <Header state={this.state.user} user={this.state.loged} logout={this.logout} />
+        <Header />
         <HeaderNav />
-
         <Switch>
-          <Route exact path='/'
+          <Route exact path='/coin'
             render={() => <Home
               state={this.state}
-              addToFavorites={this.addToFavorites}
-              removeFromFavorites={this.removeFromFavorites}
-              handleElementListCoinClick={this.handleElementListCoinClick}
-              fetchLoadData={this.fetchLoadData}
-              handleSelectet={this.handleSelectet}
-              handleSearch={this.handleSearch}
+              {...{
+                data,
+                favorites,
+                limit,
+                addToFavorites,
+                removeFromFavorites,
+                handleElementListCoinClick,
+                handleSelectet,
+                handleSearch,
+                searchValue,
+                selectedCoin
+              }}
             />}
           />
           <Route path='/favorites' render={() => <Favorites
-            state={this.state}
-            removeFromFavorites={this.removeFromFavorites}
-            goToChart={this.goToChart}
+            {...{
+              data,
+              favorites,
+              removeFromFavorites,
+              goToChart
+            }}
           />
           } />
-          <Route path='/trade' component={Trade} />
-          <Route path='/settings' render={() => <Settings state={this.state} />} />
-          <Route path='/sign-in' render={() => <SignIn login={this.login.bind(this)} />} />
-          <Route path='/sign-up' component={SignUp} />
-
+          <Route path='/trade' render={() => <Trade />} />
         </Switch>
         <Footer />
       </div>

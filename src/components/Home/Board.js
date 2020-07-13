@@ -1,19 +1,17 @@
 import React from 'react';
 import TradingViewWidget from 'react-tradingview-widget';
 
-const Board = props => {
+const Board = ({ data, favorites, addToFavorites, removeFromFavorites, selectedCoin}) => {
 
-    var button_text = "ADD TO FAVORITES";
-    var button_action = props.props.addToFavorites;
-    var button_color = "btn btn-blue hvr-float-shadow";
-    var button_icon = "fa  fa-star left";
-    var selectedCoin = props.state.selectedCoin;
-    var arrayList = props.state.data;
-    var result = arrayList.find((e) => e.name.toLowerCase() === selectedCoin.toLowerCase());
-    var favorites = props.state.favorites;
+    let button_text = "ADD TO FAVORITES";
+    let button_action = addToFavorites;
+    let button_color = "btn btn-blue hvr-float-shadow";
+    let button_icon = "fa  fa-star left";
+    const result = data.find((e) => e.name.toLowerCase() === selectedCoin.toLowerCase());
+
     if (result && favorites.indexOf(result.symbol) >= 0) {
         button_text = "REMOVE FROM FAVORITES";
-        button_action = props.props.removeFromFavorites;
+        button_action = removeFromFavorites;
         button_color = "btn btn-red hvr-float-shadow";
         button_icon = "fa  fa-remove left";
     }

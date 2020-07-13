@@ -1,19 +1,17 @@
 import React from 'react';
 
-const Search = entrie => {
-        var limit = entrie.state.limit;
-        var selectStatus = false;
-        if (entrie.state.searchValue.length!==0){
-             selectStatus=true;
-             limit=entrie.limit   
+const Search = ({ limit, searchValue, handleSearch, handleSelectet }) => {
+        let selectStatus = false;
+        if (searchValue.length !== 0) {
+                selectStatus = true;
         }
         return (
 
                 <div className="left-search-container">
-                        <span><input value={entrie.state.searchValue} onChange={entrie.handelSearch} type="text" placeholder="Search..." /></span>
-                        <span><select value={limit} onChange={entrie.handleSelectet}
+                        <span><input value={searchValue} onChange={handleSearch} type="text" placeholder="Search..." /></span>
+                        <span><select value={limit} onChange={handleSelectet}
                                 className="custom-select" id="country" disabled={selectStatus}>
-                   {selectStatus?<option value={limit}>{limit}</option>:null}
+                                {selectStatus ? <option value={limit}>{limit}</option> : null}
                                 <option value="10">10</option>
                                 <option value="20">20</option>
                                 <option value="30">30</option>
