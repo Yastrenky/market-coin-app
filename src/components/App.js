@@ -24,10 +24,10 @@ class App extends Component {
     const { state: { limit } } = this
 
     const qr = `?limit=${limit}`
-    const url = "http://localhost/coin-data"
+    const url = "/coin-data"
 
     fetch(url + qr, {
-      method: 'GET',
+      method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Accept-Charset': 'utf-8',
